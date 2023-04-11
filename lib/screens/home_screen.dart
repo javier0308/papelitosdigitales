@@ -74,7 +74,6 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: const Color(0xff9d2121),
       ),
       body: SingleChildScrollView(
-        // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         padding: const EdgeInsets.all(10),
         child: Form(
           autovalidateMode: AutovalidateMode.onUserInteraction,
