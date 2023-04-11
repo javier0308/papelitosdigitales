@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "622986863035",
+    "project_id": "hablando-huevadas-flutter",
+    "storage_bucket": "hablando-huevadas-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622986863035:android:2e9b205dc224d65aeee49e",
+        "android_client_info": {
+          "package_name": "com.hablandohuevadas.hablandohuevadasf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622986863035-7pae9prchpf6l18h77tno3rf3b5mdv4a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzt-22w9bKElORNEQ1atY8p76NAK2_vyk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622986863035-7pae9prchpf6l18h77tno3rf3b5mdv4a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
