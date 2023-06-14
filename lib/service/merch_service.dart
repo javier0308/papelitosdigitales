@@ -1,11 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:hablandohuevadasf/config/constants/environment.dart';
 import 'package:hablandohuevadasf/models/reqres_merch.dart';
 import 'package:http/http.dart' as http;
 
 class MerchService extends ChangeNotifier {
-  final String _baseUrl = 'flutter-varios-3da55-default-rtdb.firebaseio.com';
+  final String _baseUrl = Environment.firebaseKey;
   final List<Merch> merch = [];
 
   MerchService() {
