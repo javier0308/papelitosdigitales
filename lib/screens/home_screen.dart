@@ -12,10 +12,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formState = Provider.of<FormStateProvider>(context);
-    // ignore: no_leading_underscores_for_local_identifiers
-    final TextEditingController _content = TextEditingController();
-    // ignore: no_leading_underscores_for_local_identifiers
-    final TextEditingController _nick = TextEditingController();
+
+    final TextEditingController content = TextEditingController();
+
+    final TextEditingController nick = TextEditingController();
     const inputDecoration = InputDecoration(
       counterStyle: TextStyle(fontSize: 15),
       floatingLabelStyle: TextStyle(
@@ -89,11 +89,9 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     TextFormField(
-                      controller: _nick,
-                      validator: (value) {
-                        if (value!.isEmpty) return 'Campo vacio';
-                        return '';
-                      },
+                      controller: nick,
+                      enabled: !formState.submit,
+                      validator: (value) {},
                       maxLength: 15,
                       cursorColor: const Color(0xff9d2121),
                       style: const TextStyle(fontSize: 15),
@@ -103,11 +101,9 @@ class HomeScreen extends StatelessWidget {
                       height: 15,
                     ),
                     TextFormField(
-                      controller: _content,
-                      validator: (value) {
-                        if (value!.isEmpty) return 'Campo vacio';
-                        return null;
-                      },
+                      controller: content,
+                      enabled: !formState.submit,
+                      validator: (value) {},
                       maxLength: 250,
                       cursorColor: const Color(0xff9d2121),
                       style: const TextStyle(fontSize: 15),
@@ -115,43 +111,39 @@ class HomeScreen extends StatelessWidget {
                       decoration: inputDecoration2,
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 30,
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          // ignore: deprecated_member_use
-                          primary: const Color(0xff9d2121),
-                          shape: const StadiumBorder()),
+                        // ignore: deprecated_member_use
+                        primary: const Color(0xff9d2121),
+                        shape: const StadiumBorder(),
+                      ),
                       onPressed: formState.submit
                           ? null
                           : () {
-                              final String content = _content.text;
-                              final String nick = _nick.text;
-                              FocusScope.of(context).unfocus();
-                              if (!formState.formKey.currentState!.validate()) {
-                                return;
-                              }
                               formState.submit = true;
-
                               FirebaseFirestore.instance
                                   .collection("papelitos")
                                   .add(
                                 {
-                                  'papelito': content,
-                                  'nick': nick,
+                                  'papelito': content.text,
+                                  'nick': nick.text,
                                 },
                               );
-                              _nick.text = '';
-                              _content.text = '';
                               alertQuick(context);
                               formState.formKey.currentState!.reset();
+                              FocusScope.of(context).unfocus();
                             },
                       child: SizedBox(
-                        width: 80,
+                        width: MediaQuery.of(context).size.width,
+                        height: 60,
                         child: Center(
                           child: Text(
-                            formState.submit ? 'Enviado' : 'Enviar',
-                            style: const TextStyle(fontSize: 20),
+                            formState.submit
+                                ? 'Gracias por tu papelito'
+                                : 'Enviar',
+                            style: const TextStyle(fontSize: 25),
                           ),
                         ),
                       ),
