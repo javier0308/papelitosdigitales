@@ -33,7 +33,7 @@ class BannerSwiper extends StatelessWidget {
           }
         },
         scale: 0.9,
-        viewportFraction: 0.8,
+        viewportFraction: 0.85,
         autoplay: true,
         pagination: const SwiperPagination(
           margin: EdgeInsets.only(top: 0),
@@ -54,7 +54,7 @@ class BannerSwiper extends StatelessWidget {
                 child: FadeInImage(
                   placeholder: const AssetImage('assets/loading.gif'),
                   image: NetworkImage(fotos.foto),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
