@@ -21,7 +21,7 @@ class BannerSwiper extends StatelessWidget {
       ],
     );
     return SizedBox(
-      height: size.height * 0.45,
+      height: size.height * 0.4,
       width: double.infinity,
       child: Swiper(
         onTap: (index) async {

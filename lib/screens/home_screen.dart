@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
       fillColor: Colors.white,
       counterStyle: TextStyle(fontSize: 15),
       floatingLabelStyle: TextStyle(
-          color: Color(0xff9d2121), fontSize: 25, fontWeight: FontWeight.bold),
+          color: Color(0xff9d2121), fontSize: 20, fontWeight: FontWeight.bold),
       labelText: 'Nombre',
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(
@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
         color: Color(
           0xff9d2121,
         ),
-        fontSize: 25,
+        fontSize: 22,
         fontWeight: FontWeight.bold,
       ),
       labelText: 'Papelito',
@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 borderRadius: BorderRadius.circular(15),
                 color: Colors.grey[300],
               ),
-              margin: const EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 children: [
                   TextFormField(
@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           formState.submit
                               ? 'Gracias por tu papelito'
                               : 'Enviar',
-                          style: const TextStyle(fontSize: 25),
+                          style: const TextStyle(fontSize: 20),
                         ),
                       ),
                     ),
