@@ -93,8 +93,8 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 20,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
+            Container(
+              padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
                   TextFormField(
@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     decoration: inputDecoration2,
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
