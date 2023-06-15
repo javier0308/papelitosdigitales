@@ -29,53 +29,45 @@ class _HomeScreenState extends State<HomeScreen> {
     final formState = Provider.of<FormStateProvider>(context);
 
     const inputDecoration = InputDecoration(
+      filled: true,
+      fillColor: Colors.white,
       counterStyle: TextStyle(fontSize: 15),
       floatingLabelStyle: TextStyle(
-          color: Color(
-            0xff9d2121,
-          ),
-          fontSize: 25,
-          fontWeight: FontWeight.bold),
+          color: Color(0xff9d2121), fontSize: 25, fontWeight: FontWeight.bold),
       labelText: 'Nombre',
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(20),
+          Radius.circular(8),
         ),
         borderSide: BorderSide(
           color: Color(0xff9d2121),
         ),
       ),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(20),
-        ),
-      ),
+      border: InputBorder.none,
     );
     const inputDecoration2 = InputDecoration(
-      // fillColor: Colors.red,
+      filled: true,
+      fillColor: Colors.white,
       counterStyle: TextStyle(fontSize: 15),
       floatingLabelBehavior: FloatingLabelBehavior.always,
       floatingLabelAlignment: FloatingLabelAlignment.center,
       floatingLabelStyle: TextStyle(
-          color: Color(
-            0xff9d2121,
-          ),
-          fontSize: 25,
-          fontWeight: FontWeight.bold),
+        color: Color(
+          0xff9d2121,
+        ),
+        fontSize: 25,
+        fontWeight: FontWeight.bold,
+      ),
       labelText: 'Papelito',
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(20),
+          Radius.circular(8),
         ),
         borderSide: BorderSide(
           color: Color(0xff9d2121),
         ),
       ),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(20),
-        ),
-      ),
+      border: InputBorder.none,
     );
     return Scaffold(
       drawer: const CustomDrawer(),
@@ -94,7 +86,12 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 20,
             ),
             Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(25),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.grey[300],
+              ),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
                   TextFormField(
@@ -119,13 +116,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     decoration: inputDecoration2,
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xff9d2121),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                     onPressed: formState.submit
