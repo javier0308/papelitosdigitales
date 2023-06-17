@@ -129,7 +129,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         ? null
                         : () {
                             formState.submit = true;
-                            submitPaper(nick.text, content.text);
+                            submitPaper(
+                              title: nick.text,
+                              papelito: content.text,
+                            );
                             alertQuick(context);
                             nick.text = '';
                             content.text = '';
