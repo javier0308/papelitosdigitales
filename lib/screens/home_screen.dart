@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../components/widgets/banner_swiper.dart';
 import '../components/widgets/custom_drawer.dart';
 import '../config/methods/subit_paper.dart';
+import '../service/merch_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -27,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final formState = Provider.of<FormStateProvider>(context);
+    final outfits = Provider.of<MerchService>(context).merch;
 
     const inputDecoration = InputDecoration(
       filled: true,
@@ -70,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
       border: InputBorder.none,
     );
     return Scaffold(
-      drawer: const CustomDrawer(),
+      drawer: CustomDrawer(outfits: outfits),
       appBar: AppBar(
         title: const Text('Papelitos Digitales'),
         centerTitle: true,

@@ -1,19 +1,18 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:hablandohuevadasf/models/reqres_merch.dart';
-import 'package:provider/provider.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../service/merch_service.dart';
-
 class CustomDrawer extends StatelessWidget {
+  final List<Merch> outfits;
   const CustomDrawer({
     Key? key,
+    required this.outfits,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final merch = Provider.of<MerchService>(context).merch;
     return Drawer(
       width: 330,
       child: SafeArea(
@@ -31,15 +30,95 @@ class CustomDrawer extends StatelessWidget {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
+                  const Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      'Poleras',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ),
                   GridView.count(
                     physics: const ScrollPhysics(),
                     shrinkWrap: true,
                     crossAxisCount: 2,
-                    childAspectRatio: 0.60,
+                    childAspectRatio: 0.7,
                     children: List.generate(
-                      merch.length,
+                      outfits.sublist(8, 14).length,
                       (i) {
-                        final merchs = merch[i];
+                        final merchs = outfits.sublist(8, 14)[i];
+                        return _MerchCard(
+                          merchs: merchs,
+                          index: i,
+                        );
+                      },
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      'Polos',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  GridView.count(
+                    physics: const ScrollPhysics(),
+                    shrinkWrap: true,
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.7,
+                    children: List.generate(
+                      outfits.sublist(0, 7).length,
+                      (i) {
+                        final merchs = outfits.sublist(0, 7)[i];
+                        return _MerchCard(
+                          merchs: merchs,
+                          index: i,
+                        );
+                      },
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      'Otros Productos',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  GridView.count(
+                    physics: const ScrollPhysics(),
+                    shrinkWrap: true,
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.7,
+                    children: List.generate(
+                      outfits.sublist(14, 18).length,
+                      (i) {
+                        final merchs = outfits.sublist(14, 18)[i];
+                        return _MerchCard(
+                          merchs: merchs,
+                          index: i,
+                        );
+                      },
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      'Lanyards',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  GridView.count(
+                    physics: const ScrollPhysics(),
+                    shrinkWrap: true,
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.7,
+                    children: List.generate(
+                      outfits.sublist(18, 22).length,
+                      (i) {
+                        final merchs = outfits.sublist(18, 22)[i];
                         return _MerchCard(
                           merchs: merchs,
                           index: i,
