@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:hablandohuevadasf/provider/form_provider.dart';
-import 'package:hablandohuevadasf/provider/fotos_provider.dart';
-import 'package:hablandohuevadasf/screens/home_screen.dart';
+
 import 'package:firebase_core/firebase_core.dart';
-import 'package:hablandohuevadasf/service/merch_service.dart';
-import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,26 +27,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => FormStateProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => SwiperPictures(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => MerchService(),
-        )
-      ],
-      child: MaterialApp(
-        theme: ThemeData(
-          primaryColor: Colors.red[800],
-        ),
-        debugShowCheckedModeBanner: false,
-        title: 'Papelitos Digitales',
-        home: const HomeScreen(),
+    return MaterialApp(
+      theme: ThemeData(
+        primaryColor: Colors.red[800],
       ),
+      debugShowCheckedModeBanner: false,
+      title: 'Papelitos Digitales',
     );
   }
 }
