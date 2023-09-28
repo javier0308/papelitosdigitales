@@ -19,7 +19,7 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-Future initialization() async {
+Future<void> initialization() async {
   await Future.delayed(
     const Duration(seconds: 2),
   );
