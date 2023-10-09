@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hablandohuevadasf/presentation/shared/widgets/banner_swiper.dart';
+import 'package:hablandohuevadasf/presentation/presentation.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({
@@ -8,6 +8,15 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const BannerSwiper();
+    return const SingleChildScrollView(
+      // padding: EdgeInsets.all(10),
+      child: Column(
+        children: [
+          BannerSwiper(),
+          SizedBox(height: 20),
+          FormsPapers(),
+        ],
+      ),
+    );
   }
 }
