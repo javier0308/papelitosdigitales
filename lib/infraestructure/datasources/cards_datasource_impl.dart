@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:hablandohuevadasf/config/config.dart';
 import 'package:hablandohuevadasf/domain/domain.dart';
-import 'infraestructure.dart';
+import 'package:hablandohuevadasf/infraestructure/infraestructure.dart';
 import 'package:http/http.dart' as http;
 
 class CardsDataSourceImpl extends CardsDataSource {
