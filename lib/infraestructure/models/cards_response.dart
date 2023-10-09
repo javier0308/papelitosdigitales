@@ -1,15 +1,7 @@
 // To parse this JSON data, do
 //
-//     final cardsResponse = cardsResponseFromJson(jsonString);
 
 import 'dart:convert';
-
-Map<String, CardsResponse> cardsResponseFromJson(String str) =>
-    Map.from(json.decode(str)).map((k, v) =>
-        MapEntry<String, CardsResponse>(k, CardsResponse.fromJson(v)));
-
-String cardsResponseToJson(Map<String, CardsResponse> data) => json.encode(
-    Map.from(data).map((k, v) => MapEntry<String, dynamic>(k, v.toJson())));
 
 class CardsResponse {
   String foto;
@@ -19,7 +11,6 @@ class CardsResponse {
   CardsResponse({
     required this.foto,
     required this.name,
-    this.id,
   });
 
   factory CardsResponse.fromJson(String str) =>

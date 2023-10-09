@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:hablandohuevadasf/domain/domain.dart';
 
 class HomeView extends StatelessWidget {
-  // final List<Cards> cards;
+  final List<Cards> cards;
   const HomeView({
     super.key,
-    // required this.cards,
+    required this.cards,
   });
 
   @override
@@ -27,16 +27,15 @@ class HomeView extends StatelessWidget {
         scale: 0.9,
         viewportFraction: 0.8,
         autoplay: true,
-        itemCount: 6,
+        itemCount: cards.length,
         itemBuilder: (context, index) {
-          // final fotos = cards[index];
+          final card = cards[index];
 
-          return const Placeholder();
-          // return FadeInImage(
-          //   placeholder: const AssetImage('assets/loading.gif'),
-          //   image: NetworkImage(fotos.foto),
-          //   fit: BoxFit.cover,
-          // );
+          return FadeInImage(
+            placeholder: const AssetImage('assets/loading.gif'),
+            image: NetworkImage(card.foto),
+            fit: BoxFit.cover,
+          );
         },
       ),
     );

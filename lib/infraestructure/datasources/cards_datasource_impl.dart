@@ -1,27 +1,30 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:hablandohuevadasf/config/config.dart';
 import 'package:hablandohuevadasf/domain/domain.dart';
+import 'infraestructure.dart';
+import 'package:http/http.dart' as http;
 
-import 'package:hablandohuevadasf/infraestructure/models/cards_response.dart';
+class CardsDataSourceImpl extends CardsDataSource {
+  final String baseUrl = Environment.firebaseKey;
+  final List<Cards> cards = [];
 
-class CardsDatasourceImpl extends CardsDataSource {
-  final Dio dio;
-
-  CardsDatasourceImpl()
-      : dio = Dio(BaseOptions(baseUrl: Environment.firebaseKey));
   @override
   Future<List<Cards>> getCards() async {
-    final response = await dio.get('/swiper.json');
-    final Map<String, dynamic> cardsMap = json.decode(response.data);
-    final List<Cards> cards = [];
-    cardsMap.forEach((key, value) {
-      final tempCards = CardsResponse.fromMap(value);
-      tempCards.id = key;
-      cards.add(value);
-    });
+    try {
+      final url = Uri.https(baseUrl, 'swiper.json');
+      final resp = await http.get(url);
+      final Map<String, dynamic> cardsMap = json.decode(resp.body);
 
-    return cards;
+      cardsMap.forEach((key, value) {
+        final tempCard = CardsResponse.fromMap(value);
+        tempCard.id = key;
+
+        cards.add(CardsMapper.cardsToEntity(tempCard));
+      });
+      return cards;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 }
