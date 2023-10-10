@@ -13,7 +13,7 @@ class HomeView extends StatelessWidget {
       child: Column(
         children: [
           BannerSwiper(),
-          SizedBox(height: 20),
+          SizedBox(height: 10),
           FormsPapers(),
         ],
       ),

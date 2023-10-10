@@ -6,57 +6,52 @@ class FormsPapers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const inputDecoration = InputDecoration(
+      filled: true,
+      fillColor: Colors.white,
+      counterStyle: TextStyle(fontSize: 15),
+      floatingLabelStyle: TextStyle(
+          color: primaryColor, fontSize: 20, fontWeight: FontWeight.bold),
+      labelText: 'Nombre',
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(8),
+        ),
+        borderSide: BorderSide(
+          color: primaryColor,
+        ),
+      ),
+      border: InputBorder.none,
+    );
     const inputDecoration2 = InputDecoration(
-      // fillColor: Colors.red,
+      filled: true,
+      fillColor: Colors.white,
       counterStyle: TextStyle(fontSize: 15),
       floatingLabelBehavior: FloatingLabelBehavior.always,
       floatingLabelAlignment: FloatingLabelAlignment.center,
       floatingLabelStyle: TextStyle(
-          color: Color(
-            0xff9d2121,
-          ),
-          fontSize: 25,
-          fontWeight: FontWeight.bold),
+        color: primaryColor,
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+      ),
       labelText: 'Papelito',
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(20),
+          Radius.circular(8),
         ),
         borderSide: BorderSide(
-          color: Color(0xff9d2121),
+          color: primaryColor,
         ),
       ),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(20),
-        ),
-      ),
+      border: InputBorder.none,
     );
-    const inputDecoration = InputDecoration(
-      counterStyle: TextStyle(fontSize: 15),
-      floatingLabelStyle: TextStyle(
-          color: Color(
-            0xff9d2121,
-          ),
-          fontSize: 25,
-          fontWeight: FontWeight.bold),
-      labelText: 'Nombre',
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(20),
-        ),
-        borderSide: BorderSide(
-          color: Color(0xff9d2121),
-        ),
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: Colors.grey[300],
       ),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(20),
-        ),
-      ),
-    );
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      margin: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
         children: [
           TextFormField(
@@ -66,12 +61,11 @@ class FormsPapers extends StatelessWidget {
             },
             maxLength: 15,
             cursorColor: primaryColor,
+            textCapitalization: TextCapitalization.words,
             style: const TextStyle(fontSize: 15),
             decoration: inputDecoration,
           ),
-          const SizedBox(
-            height: 15,
-          ),
+          const SizedBox(height: 5),
           TextFormField(
             validator: (value) {
               if (value!.isEmpty) return 'Campo vacio';
@@ -83,14 +77,13 @@ class FormsPapers extends StatelessWidget {
             maxLines: 5,
             decoration: inputDecoration2,
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 10),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              // ignore: deprecated_member_use
-              primary: primaryColor,
-              shape: const StadiumBorder(),
+              backgroundColor: primaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
             onPressed: () {
               FocusScope.of(context).unfocus();
@@ -102,9 +95,10 @@ class FormsPapers extends StatelessWidget {
               // alertQuick(context);
               // formState.formKey.currentState!.reset();
             },
-            child: const SizedBox(
-              width: 80,
-              child: Center(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.065,
+              child: const Center(
                 child: Text(
                   'Enviar',
                   style: TextStyle(fontSize: 20, color: Colors.white),
@@ -112,6 +106,7 @@ class FormsPapers extends StatelessWidget {
               ),
             ),
           ),
+          // const SizedBox(height: 50)
         ],
       ),
     );
