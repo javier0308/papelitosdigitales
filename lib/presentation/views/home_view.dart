@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hablandohuevadasf/presentation/presentation.dart';
+
+import '../../shared/shared.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({

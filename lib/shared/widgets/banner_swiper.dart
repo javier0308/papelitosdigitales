@@ -1,9 +1,9 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hablandohuevadasf/config/config.dart';
 
-import '../../../config/config.dart';
-import '../../providers/providers.dart';
+import '../../presentation/providers/providers.dart';
 
 class BannerSwiper extends ConsumerStatefulWidget {
   const BannerSwiper({super.key});
