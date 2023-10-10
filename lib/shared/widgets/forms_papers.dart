@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hablandohuevadasf/config/config.dart';
+import 'package:hablandohuevadasf/presentation/providers/providers.dart';
 
-class FormsPapers extends StatelessWidget {
+class FormsPapers extends ConsumerWidget {
   const FormsPapers({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    const inputDecoration = InputDecoration(
+  Widget build(BuildContext context, ref) {
+    final paperForm = ref.watch(paperFormProvider);
+    final inputDecoration = InputDecoration(
       filled: true,
       fillColor: Colors.white,
-      counterStyle: TextStyle(fontSize: 15),
-      floatingLabelStyle: TextStyle(
+      counterStyle: const TextStyle(fontSize: 15),
+      floatingLabelStyle: const TextStyle(
           color: primaryColor, fontSize: 20, fontWeight: FontWeight.bold),
       labelText: 'Nombre',
-      focusedBorder: OutlineInputBorder(
+      focusedBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(8),
         ),
@@ -22,20 +25,22 @@ class FormsPapers extends StatelessWidget {
         ),
       ),
       border: InputBorder.none,
+      errorText: paperForm.isFormPosting ? paperForm.title.errorMessage : null,
     );
-    const inputDecoration2 = InputDecoration(
+    final inputDecoration2 = InputDecoration(
       filled: true,
       fillColor: Colors.white,
-      counterStyle: TextStyle(fontSize: 15),
+      counterStyle: const TextStyle(fontSize: 15),
       floatingLabelBehavior: FloatingLabelBehavior.always,
       floatingLabelAlignment: FloatingLabelAlignment.center,
-      floatingLabelStyle: TextStyle(
+      floatingLabelStyle: const TextStyle(
         color: primaryColor,
         fontSize: 22,
         fontWeight: FontWeight.bold,
       ),
       labelText: 'Papelito',
-      focusedBorder: OutlineInputBorder(
+      errorText: paperForm.isFormPosting ? paperForm.paper.errorMessage : null,
+      focusedBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(8),
         ),
@@ -55,25 +60,19 @@ class FormsPapers extends StatelessWidget {
       child: Column(
         children: [
           TextFormField(
-            validator: (value) {
-              if (value!.isEmpty) return 'Campo vacio';
-              return '';
-            },
             maxLength: 15,
             cursorColor: primaryColor,
             textCapitalization: TextCapitalization.words,
+            onChanged: ref.read(paperFormProvider.notifier).onTitleChanged,
             style: const TextStyle(fontSize: 15),
             decoration: inputDecoration,
           ),
           const SizedBox(height: 5),
           TextFormField(
-            validator: (value) {
-              if (value!.isEmpty) return 'Campo vacio';
-              return null;
-            },
             maxLength: 250,
             cursorColor: primaryColor,
             style: const TextStyle(fontSize: 15),
+            onChanged: ref.read(paperFormProvider.notifier).onPaperChanged,
             maxLines: 5,
             decoration: inputDecoration2,
           ),
@@ -87,6 +86,7 @@ class FormsPapers extends StatelessWidget {
             ),
             onPressed: () {
               FocusScope.of(context).unfocus();
+              ref.read(paperFormProvider.notifier).onFormSubmit();
               // if (!formState.formKey.currentState!.validate()) {
               //   return;
               // }
