@@ -84,17 +84,12 @@ class FormsPapers extends ConsumerWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            onPressed: () {
-              FocusScope.of(context).unfocus();
-              ref.read(paperFormProvider.notifier).onFormSubmit();
-              // if (!formState.formKey.currentState!.validate()) {
-              //   return;
-              // }
-              // formState.submit = true;
-
-              // alertQuick(context);
-              // formState.formKey.currentState!.reset();
-            },
+            onPressed: paperForm.isFormPosting
+                ? null
+                : () {
+                    FocusScope.of(context).unfocus();
+                    ref.read(paperFormProvider.notifier).onFormSubmit();
+                  },
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.065,
