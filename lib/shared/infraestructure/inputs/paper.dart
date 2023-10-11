@@ -28,7 +28,7 @@ class Paper extends FormzInput<String, PaperError> {
   PaperError? validator(String value) {
     if (value.isEmpty || value.trim().isEmpty) return PaperError.empty;
     if (value.isEmpty) return PaperError.lenght;
-    if (value.length > 15) return PaperError.maxlenght;
+    if (value.length > 250) return PaperError.maxlenght;
 
     return null;
   }

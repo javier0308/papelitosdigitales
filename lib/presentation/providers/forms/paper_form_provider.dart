@@ -1,15 +1,19 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:formz/formz.dart';
 import 'package:hablandohuevadasf/shared/shared.dart';
 
 final paperFormProvider =
     StateNotifierProvider<PaperFormNotifier, PaperFormState>((ref) {
-  return PaperFormNotifier();
+  final collection = FirebaseFirestore.instance.collection("papelitos");
+  return PaperFormNotifier(collection);
 });
 
 class PaperFormNotifier extends StateNotifier<PaperFormState> {
-  PaperFormNotifier() : super(PaperFormState());
+  final CollectionReference<Map<String, dynamic>> collection;
+  PaperFormNotifier(this.collection) : super(PaperFormState());
+
   onTitleChanged(String value) {
     final newTitle = Title.dirty(value);
     state = state.copyWith(
@@ -29,6 +33,12 @@ class PaperFormNotifier extends StateNotifier<PaperFormState> {
   onFormSubmit() {
     _touchEveryField();
     if (!state.isValid) return;
+    final title = state.title.value;
+    final paper = state.paper.value;
+    collection.add({
+      'papelito': paper,
+      'nick': title,
+    });
   }
 
   _touchEveryField() {
