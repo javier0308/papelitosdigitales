@@ -63,6 +63,7 @@ class FormsPapers extends ConsumerWidget {
             maxLength: 15,
             cursorColor: primaryColor,
             textCapitalization: TextCapitalization.words,
+            enabled: !paperForm.isPosting,
             onChanged: ref.read(paperFormProvider.notifier).onTitleChanged,
             style: const TextStyle(fontSize: 15),
             decoration: inputDecoration,
@@ -72,6 +73,7 @@ class FormsPapers extends ConsumerWidget {
             maxLength: 250,
             cursorColor: primaryColor,
             style: const TextStyle(fontSize: 15),
+            enabled: !paperForm.isPosting,
             onChanged: ref.read(paperFormProvider.notifier).onPaperChanged,
             maxLines: 5,
             decoration: inputDecoration2,
@@ -84,7 +86,7 @@ class FormsPapers extends ConsumerWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            onPressed: paperForm.isFormPosting
+            onPressed: paperForm.isPosting
                 ? null
                 : () {
                     FocusScope.of(context).unfocus();

@@ -39,6 +39,9 @@ class PaperFormNotifier extends StateNotifier<PaperFormState> {
       'papelito': paper,
       'nick': title,
     });
+    state = state.copyWith(
+      isPosting: true,
+    );
   }
 
   _touchEveryField() {
