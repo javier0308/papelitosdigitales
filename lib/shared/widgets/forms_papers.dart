@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hablandohuevadasf/config/config.dart';
+import 'package:hablandohuevadasf/config/plugins/alert_quick/alert_quick.dart';
 import 'package:hablandohuevadasf/presentation/providers/providers.dart';
 
-class FormsPapers extends ConsumerWidget {
+class FormsPapers extends ConsumerStatefulWidget {
   const FormsPapers({super.key});
 
   @override
-  Widget build(BuildContext context, ref) {
+  FormsPapersState createState() => FormsPapersState();
+}
+
+class FormsPapersState extends ConsumerState<FormsPapers> {
+  final titleController = TextEditingController();
+  final paperController = TextEditingController();
+  @override
+  void dispose() {
+    titleController.dispose();
+    paperController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final paperForm = ref.watch(paperFormProvider);
+
     final inputDecoration = InputDecoration(
       filled: true,
       fillColor: Colors.white,
@@ -63,6 +79,7 @@ class FormsPapers extends ConsumerWidget {
             maxLength: 15,
             cursorColor: primaryColor,
             textCapitalization: TextCapitalization.words,
+            controller: titleController,
             enabled: !paperForm.isPosting,
             onChanged: ref.read(paperFormProvider.notifier).onTitleChanged,
             style: const TextStyle(fontSize: 15),
@@ -72,6 +89,7 @@ class FormsPapers extends ConsumerWidget {
           TextFormField(
             maxLength: 250,
             cursorColor: primaryColor,
+            controller: paperController,
             style: const TextStyle(fontSize: 15),
             enabled: !paperForm.isPosting,
             onChanged: ref.read(paperFormProvider.notifier).onPaperChanged,
@@ -91,14 +109,17 @@ class FormsPapers extends ConsumerWidget {
                 : () {
                     FocusScope.of(context).unfocus();
                     ref.read(paperFormProvider.notifier).onFormSubmit();
+                    alertQuick(context);
+                    titleController.clear();
+                    paperController.clear();
                   },
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.065,
-              child: const Center(
+              child: Center(
                 child: Text(
-                  'Enviar',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                  paperForm.isFormPosting ? 'Enviado' : 'Enviar',
+                  style: const TextStyle(fontSize: 20, color: Colors.white),
                 ),
               ),
             ),

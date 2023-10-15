@@ -30,6 +30,26 @@ class PaperFormNotifier extends StateNotifier<PaperFormState> {
     );
   }
 
+  // clearTitleForm(String value) {
+  //   if (state.isFormPosting) {
+  //     value = ' ';
+  //     final title = Title.dirty(value);
+  //     state = state.copyWith(
+  //       title: title,
+  //     );
+  //   }
+  // }
+
+  // clearPaperForm(String value) {
+  //   if (state.isFormPosting) {
+  //     value = ' ';
+  //     final paper = Paper.dirty(value);
+  //     state = state.copyWith(
+  //       paper: paper,
+  //     );
+  //   }
+  // }
+
   onFormSubmit() {
     _touchEveryField();
     if (!state.isValid) return;
