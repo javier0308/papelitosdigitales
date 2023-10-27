@@ -5,6 +5,8 @@ import 'package:hablandohuevadasf/config/config.dart';
 
 Future<void> main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+  await AdmobPlugin.initialize();
   await DotEnvPlugin.loadEnv();
   await Firebase.initializeApp();
 

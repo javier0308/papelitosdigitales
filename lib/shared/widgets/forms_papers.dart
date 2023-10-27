@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hablandohuevadasf/config/config.dart';
 import 'package:hablandohuevadasf/config/plugins/alert_quick/alert_quick.dart';
 import 'package:hablandohuevadasf/presentation/providers/providers.dart';
@@ -14,10 +17,65 @@ class FormsPapers extends ConsumerStatefulWidget {
 class FormsPapersState extends ConsumerState<FormsPapers> {
   final titleController = TextEditingController();
   final paperController = TextEditingController();
+  InterstitialAd? _interstitialAd;
+
+  @override
+  void initState() {
+    // ref.read(interstitialAdProvider.notifier).createInterstital();
+    super.initState();
+    MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
+        testDeviceIds: ['0C2EE5EBAD2212AEFCD7CA1E09ADC957']));
+    _createInterstitialAd();
+  }
+
+  void _createInterstitialAd() {
+    InterstitialAd.load(
+        adUnitId: Platform.isAndroid
+            ? 'ca-app-pub-3940256099942544/1033173712'
+            : 'ca-app-pub-3940256099942544/4411468910',
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            print('$ad loaded');
+            _interstitialAd = ad;
+            _interstitialAd!.setImmersiveMode(true);
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('InterstitialAd failed to load: $error.');
+
+            _interstitialAd = null;
+          },
+        ));
+  }
+
+  void _showInterstitialAd() {
+    if (_interstitialAd == null) {
+      print('Warning: attempt to show interstitial before loaded.');
+      return;
+    }
+    _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (InterstitialAd ad) =>
+          print('ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        _createInterstitialAd();
+      },
+      onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        print('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+        _createInterstitialAd();
+      },
+    );
+    _interstitialAd!.show();
+    _interstitialAd = null;
+  }
+
   @override
   void dispose() {
     titleController.dispose();
     paperController.dispose();
+    _interstitialAd?.dispose();
     super.dispose();
   }
 
@@ -109,7 +167,12 @@ class FormsPapersState extends ConsumerState<FormsPapers> {
                 : () {
                     FocusScope.of(context).unfocus();
                     ref.read(paperFormProvider.notifier).onFormSubmit();
-                    alertQuick(context);
+                    // if (interstitalAdAsync.hasValue) {
+                    //   interstitalAdAsync.value?.show();
+                    // }
+                    _showInterstitialAd();
+                    // ref.read(interstitialAdProvider.notifier).showInterstital();
+                    // alertQuick(context);
                     titleController.clear();
                     paperController.clear();
                   },
